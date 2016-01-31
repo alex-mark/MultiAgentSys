@@ -10,7 +10,4 @@ rabbitmq-server
 
 RUN pip install nameko
 
-#COPY ht1.py scripts/
-
 ENTRYPOINT [“nameko”, "shell”]
-
