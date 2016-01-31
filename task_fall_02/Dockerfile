@@ -5,11 +5,12 @@ gcc g++ \
 python python3 \
 python-pip python3-pip \
 python-numpy \
-rabbitmq
+python-dev \
+rabbitmq-server
 
-RUN pip install name
+RUN pip install nameko
 
 #COPY ht1.py scripts/
 
-#ENTRYPOINT ["python", "scripts/ht1.py"]
+ENTRYPOINT [“nameko”, "shell”]
 
