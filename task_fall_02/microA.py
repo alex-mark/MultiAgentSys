@@ -1,17 +1,25 @@
+from nameko.extensions import DependencyProvider
 from nameko.rpc import rpc
 from datetime import datetime
+from nameko.containers import ServiceContainer
+
+
+class BufferA(DependencyProvider):
+    def __init__(self):
+    	t0 = datetime.now()
+        self.database = {}
+        self.database["time"] = t0
+
+    def get_dependency(self, worker_ctx):
+        return self.database 
 
 class MicroA(object):
     name = 'microA'
-    dictionary = {}
-    time = 0
-
-    def __init__(self):
-    	self.time = datetime.now()
+    buf = BufferA()
 
     @rpc
     def put(self, key, value):
-    	self.dictionary[key] = value
+    	self.buf[key] = value
     	print key
     	print value
 
@@ -20,6 +28,6 @@ class MicroA(object):
         return 0
 
     @rpc
-    def get_time(self):
-    	print "t0: ", self.time
-    	return str(self.time)
+    def get_t0(self):
+    	# print "t0: ", self.buf["time"]
+    	return str(self.buf["time"])

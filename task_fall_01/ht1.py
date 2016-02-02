@@ -17,6 +17,5 @@ def mad(s):
 	med = np.mean(s)
 	return np.mean(np.abs(s - med))
 
-print n
 print "Mean average deviation:", mad(s)
 print "Standart deviation:", np.std(s)
