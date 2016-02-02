@@ -7,7 +7,7 @@ import time
 
 class BufferB(DependencyProvider):
     def __init__(self):
-    	time = datetime.now()
+        time = datetime.now()
         self.database = {}
         self.database["time"] = time
         self.database["value"] = 0
@@ -28,11 +28,11 @@ class MicroB(object):
 
     @timer(interval=T)
     def send(self):
-    	if self.buf["at0"] == 0:
-			self.buf["at0"] = datetime.strptime(self.microA_rpc.get_t0(),"%Y-%m-%d %H:%M:%S.%f")
+        if self.buf["at0"] == 0:
+            self.buf["at0"] = datetime.strptime(self.microA_rpc.get_t0(),"%Y-%m-%d %H:%M:%S.%f")
         
         self.buf["value"] += self.buf["S"]*self.buf["F"]
         key = str(datetime.now() - self.buf["time"])
         self.microA_rpc.put(key, self.buf["value"])
 
-        print self.buf['at0']
+        # print self.buf['at0']
