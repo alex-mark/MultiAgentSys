@@ -2,6 +2,7 @@ from nameko.extensions import DependencyProvider
 from nameko.rpc import rpc
 from datetime import datetime
 from nameko.containers import ServiceContainer
+from nameko.runners import ServiceRunner, run_services
 
 
 class BufferA(DependencyProvider):
@@ -31,3 +32,11 @@ class MicroA(object):
     def get_t0(self):
     	# print "t0: ", self.buf["time"]
     	return str(self.buf["time"])
+
+if __name__ == '__main__':
+    config = {'AMQP_URI':"amqp://guest:guest@localhost"}
+    # config = {}
+    with run_services(config, MicroA) as runner:
+        runner.start()
+        runner.wait()
+        runner.stop()
