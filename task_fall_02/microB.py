@@ -26,7 +26,7 @@ class MicroB(object):
     buf = BufferB()
     T = 1
 
-    @timer(interval=T)
+    @timer(interval=T) # how to use a value from constructor?
     def send(self):
         if self.buf["at0"] == 0:
             self.buf["at0"] = datetime.strptime(self.microA_rpc.get_t0(),"%Y-%m-%d %H:%M:%S.%f")
