@@ -17,11 +17,9 @@ send.py ./
 
 RUN rabbitmq-server -detached
 
-ENTRYPOINT python
+ENTRYPOINT python send.py \
+& python send.py
 
-#RUN python send.py \
-#& python send.py
-
-#ENTRYPOINT python receive_to_file.py 
-#python receive_to_stdout.py & \
-#python agent_count.py
+RUN python receive_to_file.py 
+python receive_to_stdout.py & \
+python agent_count.py
