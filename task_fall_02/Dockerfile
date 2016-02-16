@@ -10,4 +10,10 @@ rabbitmq-server
 
 RUN pip install nameko
 
-ENTRYPOINT [“nameko”, "shell”]
+RUN rabbitmq-server -detached
+
+COPY microA.py \
+microB.py ./
+
+ENTRYPOINT nameko run microA \
+& nameko run microB
